@@ -52,5 +52,5 @@ export function _initPageWithDemoMarkdown(
   page.addBlock('affine:paragraph', {}, frameId);
   const contentParser = new ContentParser(page);
   contentParser.importMarkdown(demoText, frameId);
-  page.workspace.setPageMeta(page.id, { demoTitle });
+  page.workspace.setPageMeta(page.id, { demoTitle, subpageIds: [] });
 }

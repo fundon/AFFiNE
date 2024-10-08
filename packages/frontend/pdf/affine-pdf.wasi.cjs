@@ -93,7 +93,8 @@ const {
 });
 
 function __napi_rs_initialize_modules(__napiInstance) {
-  __napiInstance.exports['__napi_register__PdfDocument_struct_0']?.();
+  __napiInstance.exports['__napi_register__Rotation_0']?.();
+  __napiInstance.exports['__napi_register__PdfDocument_struct_1']?.();
   __napiInstance.exports['__napi_register__PdfDocument_impl_3']?.();
   __napiInstance.exports['__napi_register__PdfPage_struct_4']?.();
   __napiInstance.exports['__napi_register__PdfPage_impl_7']?.();
@@ -106,3 +107,4 @@ module.exports.PdfDocument = __napiModule.exports.PdfDocument;
 module.exports.PdfPage = __napiModule.exports.PdfPage;
 module.exports.PdfPages = __napiModule.exports.PdfPages;
 module.exports.PdfViewer = __napiModule.exports.PdfViewer;
+module.exports.Rotation = __napiModule.exports.Rotation;

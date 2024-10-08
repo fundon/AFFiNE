@@ -365,3 +365,4 @@ module.exports.PdfDocument = nativeBinding.PdfDocument;
 module.exports.PdfPage = nativeBinding.PdfPage;
 module.exports.PdfPages = nativeBinding.PdfPages;
 module.exports.PdfViewer = nativeBinding.PdfViewer;
+module.exports.Rotation = nativeBinding.Rotation;

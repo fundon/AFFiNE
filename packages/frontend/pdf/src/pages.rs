@@ -17,6 +17,10 @@ impl PdfPages {
     })
   }
 
+  pub fn get_ref(&self) -> &PdfPagesInner<'_> {
+    &*self.inner
+  }
+
   #[napi]
   pub fn len(&self) -> u16 {
     self.inner.len()

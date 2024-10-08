@@ -2,12 +2,15 @@
 /* eslint-disable */
 export declare class PdfDocument {
   pages(): PdfPages;
-  clone(): PdfDocument;
 }
 
 export declare class PdfPage {
   text(): string;
-  render(): void;
+  render(
+    width: number,
+    height: number,
+    rotation?: Rotation | undefined | null
+  ): Uint8ClampedArray | null;
 }
 
 export declare class PdfPages {
@@ -25,4 +28,11 @@ export declare class PdfViewer {
     password?: string | undefined | null
   ): PdfDocument | null;
   close(id: string): boolean;
+}
+
+export declare const enum Rotation {
+  Zero = 0,
+  One = 1,
+  Two = 2,
+  Three = 3,
 }

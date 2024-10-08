@@ -2,7 +2,7 @@ use napi::bindgen_prelude::*;
 use napi_derive::napi;
 use pdfium_render::prelude::PdfPage as PdfPageInner;
 
-use crate::PdfPages;
+use crate::{PdfPages, Rotation};
 
 #[napi]
 pub struct PdfPage {
@@ -25,7 +25,16 @@ impl PdfPage {
   }
 
   #[napi]
-  pub fn render(&self) {
-    // self.inner.render(width, height, rotation)
+  pub fn render(
+    &self,
+    width: i32,
+    height: i32,
+    rotation: Option<Rotation>,
+  ) -> Option<Uint8ClampedArray> {
+    self
+      .inner
+      .render(width, height, rotation.map(Into::into))
+      .ok()
+      .map(|bitmap| Uint8ClampedArray::from(bitmap.as_rgba_bytes()))
   }
 }

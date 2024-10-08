@@ -24,7 +24,6 @@ impl PdfDocument {
     PdfPages::new(reference, env)
   }
 
-  #[napi]
   pub fn clone(&self, env: Env) -> Result<Self> {
     self.inner.clone(env).map(Self::new)
   }

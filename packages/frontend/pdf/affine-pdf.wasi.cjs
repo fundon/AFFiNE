@@ -93,14 +93,14 @@ const {
 });
 
 function __napi_rs_initialize_modules(__napiInstance) {
-  __napiInstance.exports['__napi_register__PdfPage_struct_0']?.();
-  __napiInstance.exports['__napi_register__PdfPage_impl_2']?.();
-  __napiInstance.exports['__napi_register__PdfPages_struct_3']?.();
-  __napiInstance.exports['__napi_register__PdfPages_impl_6']?.();
-  __napiInstance.exports['__napi_register__PdfDocument_struct_7']?.();
-  __napiInstance.exports['__napi_register__PdfDocument_impl_10']?.();
-  __napiInstance.exports['__napi_register__PdfManager_struct_11']?.();
-  __napiInstance.exports['__napi_register__PdfManager_impl_17']?.();
+  __napiInstance.exports['__napi_register__PdfDocument_struct_0']?.();
+  __napiInstance.exports['__napi_register__PdfDocument_impl_3']?.();
+  __napiInstance.exports['__napi_register__PdfManager_struct_4']?.();
+  __napiInstance.exports['__napi_register__PdfManager_impl_10']?.();
+  __napiInstance.exports['__napi_register__PdfPage_struct_11']?.();
+  __napiInstance.exports['__napi_register__PdfPage_impl_14']?.();
+  __napiInstance.exports['__napi_register__PdfPages_struct_15']?.();
+  __napiInstance.exports['__napi_register__PdfPages_impl_18']?.();
 }
 module.exports.PdfDocument = __napiModule.exports.PdfDocument;
 module.exports.PdfManager = __napiModule.exports.PdfManager;

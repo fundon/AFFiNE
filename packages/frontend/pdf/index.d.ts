@@ -19,6 +19,7 @@ export declare class PdfManager {
 
 export declare class PdfPage {
   text(): string;
+  render(): void;
 }
 
 export declare class PdfPages {

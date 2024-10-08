@@ -1,9 +1,9 @@
 mod document;
-mod manager;
 mod page;
 mod pages;
+mod viewer;
 
 pub use document::*;
-pub use manager::*;
 pub use page::*;
 pub use pages::*;
+pub use viewer::*;

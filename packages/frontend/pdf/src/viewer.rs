@@ -7,11 +7,11 @@ use pdfium_render::prelude::{PdfDocument as PdfDocumentInner, Pdfium};
 
 use crate::PdfDocument;
 
-struct PdfManagerInner {
+struct PdfViewerInner {
   engine: Pdfium,
 }
 
-impl PdfManagerInner {
+impl PdfViewerInner {
   fn new() -> Result<Self> {
     Self::bind_to_library("./".to_string())
   }
@@ -19,7 +19,7 @@ impl PdfManagerInner {
   fn bind_to_library(path: String) -> Result<Self> {
     let bindings = Pdfium::bind_to_library(Pdfium::pdfium_platform_library_name_at_path(&path))
       .or_else(|_| Pdfium::bind_to_system_library())
-      .map_err(|e| std::io::Error::new(std::io::ErrorKind::NotFound, e))?;
+      .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
     let engine = Pdfium::new(bindings);
 
@@ -35,21 +35,21 @@ impl PdfManagerInner {
 }
 
 #[napi]
-pub struct PdfManager {
-  inner: PdfManagerInner,
+pub struct PdfViewer {
+  inner: PdfViewerInner,
   docs: Arc<RwLock<HashMap<String, PdfDocument>>>,
 }
 
 #[napi]
-impl PdfManager {
-  fn get_ref(&self) -> &PdfManagerInner {
+impl PdfViewer {
+  fn get_ref(&self) -> &PdfViewerInner {
     &self.inner
   }
 
   #[napi(constructor)]
   pub fn new() -> Result<Self> {
     Ok(Self {
-      inner: PdfManagerInner::new()?,
+      inner: PdfViewerInner::new()?,
       docs: Default::default(),
     })
   }
@@ -57,7 +57,7 @@ impl PdfManager {
   #[napi]
   pub fn bind_to_library(path: String) -> Result<Self> {
     Ok(Self {
-      inner: PdfManagerInner::bind_to_library(path)?,
+      inner: PdfViewerInner::bind_to_library(path)?,
       docs: Default::default(),
     })
   }
@@ -72,7 +72,7 @@ impl PdfManager {
   #[napi]
   pub fn open(
     &self,
-    reference: Reference<PdfManager>,
+    reference: Reference<PdfViewer>,
     env: Env,
     id: String,
     bytes: Buffer,
@@ -85,8 +85,8 @@ impl PdfManager {
     }
 
     let inner = reference
-      .share_with(env, |manager| {
-        manager.get_ref().open(bytes.to_vec(), password)
+      .share_with(env, |viewer| {
+        viewer.get_ref().open(bytes.to_vec(), password)
       })
       .ok()?;
 

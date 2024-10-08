@@ -5,18 +5,6 @@ export declare class PdfDocument {
   clone(): PdfDocument;
 }
 
-export declare class PdfManager {
-  constructor();
-  static bindToLibrary(path: string): PdfManager;
-  openWithId(id: string): PdfDocument | null;
-  open(
-    id: string,
-    bytes: Buffer,
-    password?: string | undefined | null
-  ): PdfDocument | null;
-  close(id: string): boolean;
-}
-
 export declare class PdfPage {
   text(): string;
   render(): void;
@@ -25,4 +13,16 @@ export declare class PdfPage {
 export declare class PdfPages {
   len(): number;
   get(index: number): PdfPage | null;
+}
+
+export declare class PdfViewer {
+  constructor();
+  static bindToLibrary(path: string): PdfViewer;
+  openWithId(id: string): PdfDocument | null;
+  open(
+    id: string,
+    bytes: Buffer,
+    password?: string | undefined | null
+  ): PdfDocument | null;
+  close(id: string): boolean;
 }

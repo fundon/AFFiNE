@@ -2,16 +2,16 @@ use napi::{bindgen_prelude::*, Env};
 use napi_derive::napi;
 use pdfium_render::prelude::PdfDocument as PdfDocumentInner;
 
-use crate::{PdfManager, PdfPages};
+use crate::{PdfPages, PdfViewer};
 
 #[napi]
 pub struct PdfDocument {
-  inner: SharedReference<PdfManager, PdfDocumentInner<'static>>,
+  inner: SharedReference<PdfViewer, PdfDocumentInner<'static>>,
 }
 
 #[napi]
 impl PdfDocument {
-  pub fn new(inner: SharedReference<PdfManager, PdfDocumentInner<'_>>) -> Self {
+  pub fn new(inner: SharedReference<PdfViewer, PdfDocumentInner<'_>>) -> Self {
     Self { inner }
   }
 
@@ -26,8 +26,6 @@ impl PdfDocument {
 
   #[napi]
   pub fn clone(&self, env: Env) -> Result<Self> {
-    Ok(Self {
-      inner: self.inner.clone(env)?,
-    })
+    self.inner.clone(env).map(Self::new)
   }
 }

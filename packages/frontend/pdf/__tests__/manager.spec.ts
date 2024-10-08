@@ -4,11 +4,11 @@ import { fileURLToPath } from 'node:url';
 import { nanoid } from '@blocksuite/affine/store';
 import { assert, expect, test } from 'vitest';
 
-import { PdfManager } from '../index';
+import { PdfViewer } from '../index';
 
-test('pdf manager', async () => {
+test('pdf viewer', async () => {
   const path = fileURLToPath(new URL('..', import.meta.url));
-  const manager = PdfManager.bindToLibrary(path);
+  const viewer = PdfViewer.bindToLibrary(path);
 
   const filepath = fileURLToPath(
     new URL('./fixtures/minimal.pdf', import.meta.url)
@@ -17,7 +17,7 @@ test('pdf manager', async () => {
 
   const id = nanoid();
 
-  const doc = manager.open(id, bytes);
+  const doc = viewer.open(id, bytes);
   assert(doc);
 
   const pages = doc.pages();
@@ -27,7 +27,7 @@ test('pdf manager', async () => {
   assert(page);
   expect(page.text().length).gt(0);
 
-  const doc2 = manager.openWithId(id);
+  const doc2 = viewer.openWithId(id);
   assert(doc2);
 
   const pages2 = doc2.pages();
